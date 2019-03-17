@@ -1,5 +1,5 @@
 import React from "react"
-import Layout from "../layout"
+import Layout from "./layout"
 import get from "lodash/get"
 import Link from "gatsby-link"
 
