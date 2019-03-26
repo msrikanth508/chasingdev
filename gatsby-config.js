@@ -3,7 +3,7 @@ module.exports = {
     title: 'Technical blog',
     description: "My name is Srikanth, I write about tech on my blog. I'am passionate about web.",
     author: 'Srikanth',
-    siteUrl: 'https://gatsby-blog-template.netlify.com/',
+    siteUrl: 'https://gatsby-blog-template.netlify.com',
     twitterUserName: '_srikanthm_'
   },
   plugins: [
