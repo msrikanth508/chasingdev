@@ -2,27 +2,52 @@ import React from "react"
 import Layout from "../components/layout"
 import { graphql } from "gatsby"
 import SEO from "../components/seo"
+import  Img from 'gatsby-image'
 
-class BlogPostTemplate extends React.Component {
-  render() {
-    const post = this.props.data.markdownRemark
-    return (
-      <Layout>
-        <SEO data={post} />
-        <section
+const BlogPostTemplate = props => {
+  const {
+    location,
+    data: {
+      site: { siteMetadata },
+      markdownRemark: { html, frontmatter, description },
+    },
+  } = props
+  const { siteUrl, twitterUserName, author } = siteMetadata
+  const url = `${siteUrl}${location.pathname}`
+  const imageURL = `${siteUrl}${frontmatter.cover.childImageSharp.resize.src}`
+  const { title: postTitle, date, keywords } = frontmatter
+
+  return (
+    <Layout>
+      <SEO
+        title={postTitle}
+        description={description}
+        keywords={keywords}
+        url={url}
+        imageURL={imageURL}
+        siteName={siteUrl}
+        author={author}
+        twitterUserName={twitterUserName}
+      />
+      <section
+        style={{
+          padding: "16px",
+        }}
+      >
+        <article
           style={{
-            padding: "16px",
-            border: "1px solid #cdcdcd",
-            boxShadow: "0px 1px 1px #cdcdcd",
+            paddingBottom: "8px",
           }}
         >
-          <h3>{post.frontmatter.title}</h3>
-          <p>{post.frontmatter.date}</p>
-          <p dangerouslySetInnerHTML={{ __html: post.html }} />
-        </section>
-      </Layout>
-    )
-  }
+          <Img fluid={frontmatter.cover.childImageSharp.fluid} />
+        </article>
+
+        <h1>{postTitle}</h1>
+        <h6>{date}</h6>
+        <p dangerouslySetInnerHTML={{ __html: html }} />
+      </section>
+    </Layout>
+  )
 }
 
 export default BlogPostTemplate
@@ -33,15 +58,27 @@ export const pageQuery = graphql`
       siteMetadata {
         title
         author
+        siteUrl
+        twitterUserName
       }
     }
     markdownRemark(fields: { slug: { eq: $slug } }) {
-      id
       html
-      excerpt(pruneLength: 280)
+      description: excerpt(pruneLength: 200)
       frontmatter {
         title
+        keywords
         date(formatString: "DD MMMM, YYYY")
+        cover {
+          childImageSharp {
+            resize(width: 1200, height: 1200) {
+              src
+            }
+            fluid(maxWidth: 786) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
       }
     }
   }

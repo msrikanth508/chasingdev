@@ -1,98 +1,126 @@
-/**
- * SEO component that queries for data with
- *  Gatsby's useStaticQuery React hook
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
+import React from 'react'
+import Helmet from 'react-helmet'
+import PropTypes from 'prop-types'
 
-import React from "react"
-import PropTypes from "prop-types"
-import Helmet from "react-helmet"
-import { useStaticQuery, graphql } from "gatsby"
-
-function SEO({ description, lang, meta, keywords, title }) {
-  const { site } = useStaticQuery(
-    graphql`
-      query {
-        site {
-          siteMetadata {
-            title
-            description
-            author
-          }
-        }
+const SEO = ({
+  title,
+  description,
+  keywords,
+  url,
+  imageURL,
+  siteTitle,
+  lang,
+  author,
+  twitterUserName
+}) => (
+  <Helmet
+    htmlAttributes={{
+      lang
+    }}
+    title={title}
+    meta={[
+      {
+        name: 'title',
+        content: title
+      },
+      {
+        name: 'description',
+        content: description
       }
-    `
-  )
-
-  const metaDescription = description || site.siteMetadata.description
-
-  return (
-    <Helmet
-      htmlAttributes={{
-        lang,
-      }}
-      title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
-      meta={[
+    ]
+      .concat(
+        keywords.length > 0
+          ? {
+            name: `keywords`,
+            content: keywords.join(`, `)
+          }
+          : []
+      )
+      .concat([
+        /** Facebook meta tags */
         {
-          name: `description`,
-          content: metaDescription,
+          property: 'og:title',
+          content: title
         },
         {
-          property: `og:title`,
-          content: title,
+          property: 'og:description',
+          content: description
         },
         {
-          property: `og:description`,
-          content: metaDescription,
+          property: 'og:url',
+          content: url
         },
         {
-          property: `og:type`,
-          content: `website`,
+          property: 'og:image',
+          content: imageURL
         },
         {
-          name: `twitter:card`,
-          content: `summary`,
+          property: 'og:image:secure_url',
+          content: imageURL
         },
         {
-          name: `twitter:creator`,
-          content: site.siteMetadata.author,
+          property: 'og:image:width',
+          content: '1200'
         },
         {
-          name: `twitter:title`,
-          content: title,
+          property: 'og:image:height',
+          content: '630'
         },
         {
-          name: `twitter:description`,
-          content: metaDescription,
+          property: 'og:locale',
+          content: lang
         },
-      ]
-        .concat(
-          keywords.length > 0
-            ? {
-                name: `keywords`,
-                content: keywords.join(`, `),
-              }
-            : []
-        )
-        .concat(meta)}
-    />
-  )
-}
+        {
+          property: 'og:type',
+          content: 'website'
+        },
+        {
+          property: 'og:site_name',
+          content: siteTitle
+        },
+        /** Twitter meta tags */
+        {
+          name: 'twitter:card',
+          content: 'summary_large_image'
+        },
+        {
+          name: 'twitter:site',
+          content: twitterUserName
+        },
+        {
+          name: 'twitter:creator',
+          content: author,
+        },
+        {
+          name: 'twitter:title',
+          content: title
+        },
+        {
+          name: 'twitter:description',
+          content: description
+        },
+        {
+          name: 'twitter:image',
+          content: imageURL
+        }
+      ])}
+  />
+)
 
 SEO.defaultProps = {
-  lang: `en`,
-  meta: [],
-  keywords: [],
+  lang: 'en',
+  keywords: []
 }
 
 SEO.propTypes = {
+  title: PropTypes.string,
   description: PropTypes.string,
+  keywords: PropTypes.array,
+  url: PropTypes.string,
+  imageURL: PropTypes.string,
+  siteName: PropTypes.string,
   lang: PropTypes.string,
-  meta: PropTypes.array,
-  keywords: PropTypes.arrayOf(PropTypes.string),
-  title: PropTypes.string.isRequired,
+  author: PropTypes.string,
 }
 
 export default SEO
