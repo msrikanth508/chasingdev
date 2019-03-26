@@ -3,7 +3,6 @@ module.exports = {
     title: 'Technical blog',
     description: "My name is Srikanth, I write about tech on my blog. I'am passionate about web.",
     author: 'Srikanth',
-    siteUrl: 'https://chasingdev.me',
     twitterUserName: '_srikanthm_'
   },
   plugins: [

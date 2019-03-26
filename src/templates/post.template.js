@@ -13,8 +13,8 @@ const BlogPostTemplate = props => {
     },
   } = props
   const { siteUrl, twitterUserName, author } = siteMetadata
-  const url = `${siteUrl}${location.pathname}`
-  const imageURL = `${siteUrl}${frontmatter.cover.childImageSharp.resize.src}`
+  const url = `${siteUrl || location.origin}${location.pathname}`
+  const imageURL = `${siteUrl || location.origin}${frontmatter.cover.childImageSharp.resize.src}`
   const { title: postTitle, date, keywords } = frontmatter
 
   return (

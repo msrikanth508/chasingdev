@@ -85,7 +85,7 @@ const SEO = ({
         },
         {
           name: 'twitter:site',
-          content: twitterUserName
+          content: `@${twitterUserName}`
         },
         {
           name: 'twitter:creator',
