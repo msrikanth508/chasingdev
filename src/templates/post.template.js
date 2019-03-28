@@ -36,7 +36,7 @@ const BlogPostTemplate = props => {
         <section className="article__body">
           <h1>{postTitle}</h1>
           <h6>{date}</h6>
-          <p dangerouslySetInnerHTML={{ __html: html }} />
+          <div dangerouslySetInnerHTML={{ __html: html }} />
         </section>
         <section className="article__footer">
           <Share title={postTitle} tags={keywords} url={url} />
