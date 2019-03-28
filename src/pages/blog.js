@@ -1,12 +1,9 @@
-// import React from 'react'
-import Blog  from '../components/Blog'
 import React from 'react'
-import get from 'lodash/get'
+import Blog  from '../components/Blog'
 import { graphql } from 'gatsby'
 
-
 export default (props) => {
-    const posts = get(props, 'data.allMarkdownRemark.edges')
+    const posts = props.data.allMarkdownRemark.edges;
     return (
       <Blog posts={posts} location={props.location} />
     )

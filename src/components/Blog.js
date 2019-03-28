@@ -1,6 +1,5 @@
 import React from "react"
 import Layout from "./layout"
-import get from "lodash/get"
 import Link from "gatsby-link"
 
 export default ({ location, posts }) => (
@@ -14,13 +13,13 @@ export default ({ location, posts }) => (
       }}
     >
       {posts.map(({ node }) => {
-        const title = get(node, "frontmatter.title") || node.fields.slug
+        const title = node.frontmatter.title || node.fields.slug
         return (
           <React.Fragment>
             <h3>
               <Link to={node.fields.slug}>{title}</Link>
             </h3>
-            <p className="font-normal text-xs">
+            <p>
               <span>{node.frontmatter.date}</span>
             </p>
             <p dangerouslySetInnerHTML={{ __html: node.excerpt }} />

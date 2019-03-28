@@ -1,0 +1,25 @@
+.share-post {
+    display: flex;
+    justify-content: center;
+}
+
+.share-post__body {
+    display: flex;
+    margin: 0 8px;
+    align-items: center;
+}
+
+.share-post__body--title {
+    margin: 0 8px;
+}
+
+.share-post__body--button {
+    padding: 0 8px 0 0;
+    cursor: pointer;
+    outline: none;
+    will-change: transform;
+}
+.share-post__body--button:hover{
+    transform: scale(1.2);
+    padding:0 4px;
+}
